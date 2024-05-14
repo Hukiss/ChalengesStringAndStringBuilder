@@ -39,10 +39,10 @@ public class Main {
     }
 
     /*
-    *É neste método onde todas as palavras são armazenadas usando a estrutura de dados fornecido pelo Java a LinkedList.
-    * Tudo isso foi feito graças ao uso da classe StringBuilder com o seu método append().
-    * Transformei todo texto em um array de char e percorrri ela usando o foreach e o for com condição.
-     */
+    *   É neste método onde todas as palavras são armazenadas usando a estrutura de dados fornecido pelo Java a         LinkedList.
+    *   Tudo isso foi feito graças ao uso da classe StringBuilder com o seu método append().
+    *   Transformei todo texto em um array de char e percorrri ela usando o foreach e o for com condição.
+    */
     public static void listarPalavras(LinkedList<String> lista, char[] character){
         StringBuilder builder = new StringBuilder();
 
@@ -63,9 +63,9 @@ public class Main {
     }
 
     /*
-    *Assim como o nome do método diz, ele elimina as palavras repetidas e ao mesmo temmpo
-    * faz a contagem de todas as palavras e as imprimi para melhor organização
-     */
+    *   Assim como o nome do método diz, ele elimina as palavras repetidas e ao mesmo temmpo
+    *   faz a contagem de todas as palavras e as imprimi para melhor organização
+    */
     public static void eliminarPalavrasRepetidas(LinkedList<String> lista){
 
         for (int i = 0; i < lista.size() - 1; i++) {
@@ -81,7 +81,7 @@ public class Main {
                     j++;
                 }
             }
-            System.out.printf("%n%s%s\t%s%d", "Elemento: ",lista.get(i), "Retições: ", quantidade);
+            System.out.printf("%n%s%s\t\t%s%d", "Elemento: ",lista.get(i), "Repetições: ", quantidade);
         }
     }
 
