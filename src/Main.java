@@ -81,7 +81,7 @@ public class Main {
                     j++;
                 }
             }
-            System.out.printf("%n%s%s\t%s%d", "Elemento: ", "Retições: ",lista.get(i), quantidade);
+            System.out.printf("%n%s%s\t%s%d", "Elemento: ",lista.get(i), "Retições: ", quantidade);
         }
     }
 
