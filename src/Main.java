@@ -68,11 +68,12 @@ public class Main {
     */
     public static void eliminarPalavrasRepetidas(LinkedList<String> lista){
 
-        for (int i = 0; i < lista.size() - 1; i++) {
+        for (int i = 0; i < lista.size() ; i++) {
 
             int quantidade = 1;
 
             for (int j = i + 1; j < lista.size() ; ) {
+
                 if(lista.get(i).equals(lista.get(j))) {
                     lista.remove(j);
                     quantidade++;
@@ -81,6 +82,7 @@ public class Main {
                     j++;
                 }
             }
+
             System.out.printf("%n%s%s\t\t%s%d", "Elemento: ",lista.get(i), "Repetições: ", quantidade);
         }
     }
@@ -89,6 +91,7 @@ public class Main {
     *Este metódo é usado para eliminar todos os sinais da lingua portuguesa (dentro do texto), sinais como:
     *   , . < > ; : ! @ # $ % ¨ & * ( ) - _ + = ' entre outros sinais existentes
      */
+
     public static void eliminandoSinais(char[] character){
 
         char[] sinais = {'!', '\"', '@', '#', '$', '%', '¨', '&', '*', '(', ')', '_', '-', '+', '=', ',', '.', '<', '>', '/', '?', '°', ':', ';'};
