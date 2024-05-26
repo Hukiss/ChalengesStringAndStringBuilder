@@ -12,64 +12,35 @@
 * o: 2
 * rápido: 1
 * também: 1
- */
+*
+*/
 
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
+
+    public static final  char NULO = ' ';
+    public static StringBuilder builder = new StringBuilder();
+
     public static void main(String[] args) {
 
         LinkedList<String> lista = new LinkedList<>();
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\n\nEscreva um texto:");
-        String string = scanner.nextLine();
+        String[] string = new StringBuilder(scanner.nextLine()).toString().split(" ");
 
-        char[] character = new char[string.length()];
-        string.getChars(0, string.length(), character, 0);
-
-        eliminandoSinais(character);
-        listarPalavras(lista, character);
+        eliminandoSinais(string, lista);
+        enumerarPalavrasRepetidas(lista);
 
         System.out.printf("%n%s%d%n","Quantidade de palavras armazenadas na lista: ", lista.size());
 
-        eliminarPalavrasRepetidas(lista);
-
     }
 
-    /*
-    *   É neste método onde todas as palavras são armazenadas usando a estrutura de dados fornecido pelo Java a         LinkedList.
-    *   Tudo isso foi feito graças ao uso da classe StringBuilder com o seu método append().
-    *   Transformei todo texto em um array de char e percorrri ela usando o foreach e o for com condição.
-    */
-    public static void listarPalavras(LinkedList<String> lista, char[] character){
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0;i < character.length; i++){
-            if (character[i] == ' '){
-
-                if (!(character[i - 1] == ' ')){
-                    lista.add(builder.toString());
-                    builder.delete(0, builder.length());
-                }
-
-            } else if (i == character.length - 1) {
-                builder.append(character[i]);
-                lista.add(builder.toString());
-            } else
-                builder.append(character[i]);
-        }
-    }
-
-    /*
-    *   Assim como o nome do método diz, ele elimina as palavras repetidas e ao mesmo temmpo
-    *   faz a contagem de todas as palavras e as imprimi para melhor organização
-    */
-    public static void eliminarPalavrasRepetidas(LinkedList<String> lista){
-
+    //O método 'enumerarPalavrasRepetidas' serve para fazer a contagem das palavras e dizer quantas vezes uma palavra foi repetida;
+    public static void enumerarPalavrasRepetidas(LinkedList<String> lista){
         for (int i = 0; i < lista.size() ; i++) {
-
             int quantidade = 1;
 
             for (int j = i + 1; j < lista.size() ; ) {
@@ -78,28 +49,42 @@ public class Main {
                     lista.remove(j);
                     quantidade++;
                     j = i + 1;
-                } else {
+                } else
                     j++;
-                }
-            }
 
+            }
             System.out.printf("%n%s%s\t\t%s%d", "Elemento: ",lista.get(i), "Repetições: ", quantidade);
         }
     }
 
-    /*
-    *Este metódo é usado para eliminar todos os sinais da lingua portuguesa (dentro do texto), sinais como:
-    *   , . < > ; : ! @ # $ % ¨ & * ( ) - _ + = ' entre outros sinais existentes
-     */
+    //Transforma todos os tokens armazenados no Array 'palavras' em Array de 'char'. Usa o método 'verificarSinais' e vai adicionado o retorno em um append() para tornar em uma palavra nova, sem os sinais;
+    public static void eliminandoSinais(String[] palavras, LinkedList<String> lista) {
 
-    public static void eliminandoSinais(char[] character){
+        for (int i = 0; i < palavras.length; i++){
 
-        char[] sinais = {'!', '\"', '@', '#', '$', '%', '¨', '&', '*', '(', ')', '_', '-', '+', '=', ',', '.', '<', '>', '/', '?', '°', ':', ';'};
+            builder.delete(0, builder.length());
+            char[] character = new char[palavras[i].length()];
+            palavras[i].getChars(0, character.length , character, 0);
 
-        for (int i = 0; i < character.length; i++){
-            for (char sinal : sinais)
-                if (character[i] == sinal)
-                    character[i] = ' ';
+            for (int j = 0; j < character.length; j++) {
+
+                builder.append(verificarSinais(character[j]));
+
+                if (j == character.length - 1)
+                    lista.add(builder.toString().trim());
+
+            }
         }
+    }
+
+    //Retorna todos os caracteres listados como 'sinais' em espaço vazio;
+    public static char verificarSinais(char character){
+        char[] sinais = {'!', '\"', '@', '#', '$', '%', '¨', '&', '*', '(', ')',  '_', '-', '+', '=', ',', '.',  '<', '>', '/', '?', '°', ':',  ';'};
+
+        for (char c : sinais)
+            if (character == c)
+                character = NULO;
+
+        return character;
     }
 }
